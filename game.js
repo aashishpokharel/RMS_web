@@ -67,21 +67,19 @@ function checkWinConditions(element){
     if(win){
         for(var i = 0;i<3;i++){
             document.getElementById('cell'+row+i).classList.add('wincell')  
-        }
-        
+        }   
     }
-
-
-
 }
 
 function cpuTurn(){
     var ok = false;
-    while(!ok){
+    var kl = 0;
+    while(!ok && kl <1000){
         row = Math.floor(Math.random()*3);
         column= Math.floor(Math.random()*3);
-        if(document.getElementById('cell'+row+column).textContent == ''){
+        if(document.getElementById('cell'+row+column).innerHTML == ''){
             ok = true;
         }
     }
+    console.log('unsuccessful');
 }
