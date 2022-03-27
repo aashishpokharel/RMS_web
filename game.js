@@ -1,7 +1,6 @@
-var turn;
 var enemySymbol = 'O',playerSymbol = 'X';
 var win;
-var turn;
+var turn = 0;
 var row, column;
 var cpuEnabled = true;
 
@@ -14,17 +13,19 @@ restart.addEventListener('click', function(){
 })
 
 // On clicking the cell
-const table = document.querySelector('.cell');
+const cells = document.querySelectorAll('.cell');
 
-table.addEventListener('click', function(item){
-    if(!win && this.innerHTML == ''){
-        if(turn%2 === 0){
-            insertSymbol(this, playerSymbol);
-        }else{
-            insertSymbol(this, enemySymbol);
+cells.forEach(cell => {
+    cell.addEventListener('click', function(item){
+        if(!win && this.innerHTML == ''){
+            if(turn%2 === 0){
+                insertSymbol(this, playerSymbol);
+            }else{
+                insertSymbol(this, enemySymbol);
+            }
         }
-    }
-});
+    });
+})
 
 function insertSymbol(element, symbol){
     element.innerHTML = symbol;
@@ -35,14 +36,14 @@ function insertSymbol(element, symbol){
     checkWinConditions(element);
     turn++;
     if(win || turn>8){
-        document.getElementById('#restart').classList.add('btn-green');
+        document.getElementById('restart').classList.add('btn-green');
 
     }else if(cpuEnabled && turn%2 !== 0){
         cpuTurn();
     }
 
 }
- 
+
 function restartGame(){
     turn = 0;
     win = false;
@@ -66,8 +67,8 @@ function checkWinConditions(element){
     }
     if(win){
         for(var i = 0;i<3;i++){
-            document.getElementById('cell'+row+i).classList.add('wincell')  
-        }   
+            document.getElementById('cell'+row+i).classList.add('wincell')
+        }
     }
 }
 
